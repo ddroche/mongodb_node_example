@@ -17,4 +17,18 @@ router.put('/award/:id', function(req, res, next) {
   res.json(results);
 });
 
+router.post('/:id/:firstName/:lastName', function(req, res, next) {
+  var results = mongo.bios.insert({'_id': parseInt(req.params.id),
+                                  'name': {'first':req.params.firstName,'last':req.params.lastName}});
+
+
+  res.json(results);
+});
+
+router.delete('/:id', function(req, res, next) {
+  var results = mongo.bios.remove({'_id': parseInt(req.params.id)}, {justOne: true});
+
+  res.json(results);
+});
+
 module.exports = router;
